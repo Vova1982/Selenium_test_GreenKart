@@ -1,0 +1,51 @@
+package GreenKart;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class GreenKartTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.setProperty( "webdriver.chrome.driver", "C:\\chromedriver.exe");
+		WebDriver driver=new ChromeDriver();
+		
+		int j=0;
+		
+		String[] itemsAddtoNeed = {"Mushroom", "Brocolli", "Pista"}; 
+		driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
+		   String title = driver.getTitle();
+	       System.out.println("This is " + title);
+	       List<WebElement> products = driver.findElements(By.cssSelector("h4.product-name"));
+	       for(int i=0; i<products.size(); i++) 
+	       {
+	    	   //1 kg
+	    	   String[] name= products.get(i).getText().split("-");
+	    	   String formatName =name[0].trim();
+	    	   
+	    	   //format it to get actual vegetable name
+	    	   //Check whether name you expected is in array or not
+	    	   //conver array into array list for easy search
+	    	 //Check whether name you expected is in array or not
+	    	   List itemsAddtoNeedList = Arrays.asList(itemsAddtoNeed ); 
+	    	   
+	  
+	    	   if(itemsAddtoNeedList.contains(formatName))
+	    	   {
+	    		   j++;
+	       //add to cart
+	       driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click();
+	       if(j==3) {
+	    	   break;
+	       }
+	       
+	}
+
+}
+	}
+}
